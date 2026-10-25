@@ -27,14 +27,14 @@ export default function Footer() {
           <h3 className="text-sm font-semibold mb-3">Контакт</h3>
           <ul className="space-y-2 text-sm text-ink-soft">
             <li>Пон–Пет · 9:00–18:00</li>
-            <li>hello@airfryer.bg</li>
+            <li>hello@airfryer.eu</li>
             <li><Link href="/#faq" className="hover:text-ink">Доставка, връщане, гаранция</Link></li>
           </ul>
         </div>
       </div>
       <div className="border-t border-ink/10">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 py-5 flex flex-col gap-2 text-xs text-ink-soft">
-          <p>© {new Date().getFullYear()} AirFryer.bg · Всички цени са в евро с ДДС</p>
+          <p>© {new Date().getFullYear()} AirFryer.eu · Всички цени са в евро с ДДС</p>
           <p>
             Снимки:{' '}
             {imageCredits.map((c, i) => (

@@ -13,7 +13,7 @@ const nav = [
 export function Logo({ className = '' }: { className?: string }) {
   return (
     <Link href="/" className={`font-semibold text-lg tracking-tight ${className}`}>
-      airfryer<span className="text-brand">.bg</span>
+      airfryer<span className="text-brand">.eu</span>
     </Link>
   );
 }

@@ -1,8 +1,11 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, RotateCcw, ShieldCheck, Truck, CreditCard, Plus } from 'lucide-react';
 import ProductCard from '@/components/ProductCard';
 import { products } from '@/lib/products';
+
+export const metadata: Metadata = { alternates: { canonical: '/' } };
 
 const faqs = [
   { q: 'Как се плаща?', a: 'Можете да платите с карта (Visa, Mastercard, Apple Pay, Google Pay) чрез защитената платформа на Stripe или с наложен платеж при получаване в офис на Еконт или до адрес.' },
@@ -116,7 +119,7 @@ export default function Home() {
             </details>
           ))}
         </div>
-        <p className="mt-6 text-sm text-ink-soft">Не намирате отговор? Пишете ни на hello@airfryer.bg.</p>
+        <p className="mt-6 text-sm text-ink-soft">Не намирате отговор? Пишете ни на hello@airfryer.eu.</p>
       </section>
     </>
   );

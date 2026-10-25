@@ -1,4 +1,4 @@
-# AirFryer.bg
+# AirFryer.eu
 
 Next.js 16 store for air fryers in Bulgaria, with Stripe card payments and Econt cash-on-delivery.
 

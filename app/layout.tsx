@@ -12,13 +12,26 @@ const plex = IBM_Plex_Sans({
   weight: ['400', '500', '600'],
 });
 
+const description =
+  'Фритюрници с горещ въздух с доставка до всеки офис на Еконт. Хрупкаво, без олио, с 2 години гаранция.';
+
 export const metadata: Metadata = {
+  metadataBase: new URL('https://airfryer.eu'),
   title: {
-    default: 'AirFryer.bg — Фритюрници с горещ въздух',
-    template: '%s · AirFryer.bg',
+    default: 'AirFryer.eu — Фритюрници с горещ въздух',
+    template: '%s · AirFryer.eu',
   },
-  description:
-    'Фритюрници с горещ въздух с доставка до всеки офис на Еконт. Хрупкаво, без олио, с 2 години гаранция.',
+  description,
+  applicationName: 'AirFryer.eu',
+  openGraph: {
+    type: 'website',
+    siteName: 'AirFryer.eu',
+    locale: 'bg_BG',
+    title: 'AirFryer.eu — Фритюрници с горещ въздух',
+    description,
+    images: [{ url: '/images/aira-classic.jpg', width: 1024, height: 1008, alt: 'Фритюрник с горещ въздух' }],
+  },
+  twitter: { card: 'summary_large_image' },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

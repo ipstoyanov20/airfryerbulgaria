@@ -13,7 +13,14 @@ export function generateStaticParams() {
 export async function generateMetadata(props: PageProps<'/product/[id]'>): Promise<Metadata> {
   const { id } = await props.params;
   const product = getProduct(id);
-  return product ? { title: `${product.name} ${product.capacity}`, description: product.description } : {};
+  if (!product) return {};
+  const title = `${product.name} ${product.capacity}`;
+  return {
+    title,
+    description: product.description,
+    alternates: { canonical: `/product/${product.id}` },
+    openGraph: { title, description: product.description, url: `/product/${product.id}`, images: [{ url: product.image, alt: product.name }] },
+  };
 }
 
 export default async function ProductPage(props: PageProps<'/product/[id]'>) {

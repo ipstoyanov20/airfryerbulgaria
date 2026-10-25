@@ -3,7 +3,7 @@ import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 import { categories, products, type Category } from '@/lib/products';
 
-export const metadata: Metadata = { title: 'Всички модели' };
+export const metadata: Metadata = { title: 'Всички модели', alternates: { canonical: '/products' } };
 
 const sorts = {
   popular: { label: 'Популярни', fn: (a: (typeof products)[0], b: (typeof products)[0]) => b.reviews - a.reviews },
