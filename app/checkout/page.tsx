@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { CheckCircle2, CreditCard, Lock, Minus, Plus, Trash2, Truck } from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
 import { formatPrice, getProduct } from '@/lib/products';
-import FryerArt from '@/components/FryerArt';
+import ProductImage from '@/components/ProductImage';
 
 /** Shape of the postMessage payload sent by Econt's delivery calculator iframe. */
 interface EcontDeliveryData {
@@ -113,8 +113,8 @@ export default function CheckoutPage() {
   if (order) {
     return (
       <div className="mx-auto max-w-xl px-4 py-24 text-center">
-        <CheckCircle2 className="size-16 text-ember mx-auto mb-6" />
-        <h1 className="font-display text-3xl sm:text-4xl tracking-tight">Благодарим за поръчката!</h1>
+        <CheckCircle2 className="size-16 text-brand mx-auto mb-6" />
+        <h1 className="font-semibold text-2xl sm:text-4xl ">Благодарим за поръчката!</h1>
         <p className="mt-4 text-ink-soft">
           Поръчка <b className="text-ink">{order.id}</b> е приета. Ще платите при получаване.
           {order.waybillNumber && (
@@ -124,7 +124,7 @@ export default function CheckoutPage() {
             </>
           )}
         </p>
-        <Link href="/" className="mt-8 inline-flex rounded-full bg-ink text-cream px-8 py-4 font-medium hover:bg-ember transition-colors">
+        <Link href="/" className="mt-8 inline-flex rounded-md bg-brand text-white px-6 py-3 font-medium hover:bg-brand-deep transition-colors">
           Продължи пазаруването
         </Link>
       </div>
@@ -134,9 +134,9 @@ export default function CheckoutPage() {
   if (items.length === 0) {
     return (
       <div className="mx-auto max-w-xl px-4 py-24 text-center">
-        <h1 className="font-display text-3xl sm:text-4xl tracking-tight">Количката е празна</h1>
+        <h1 className="font-semibold text-2xl sm:text-4xl ">Количката е празна</h1>
         <p className="mt-4 text-ink-soft">Добавете фритюрник, за да продължите към поръчка.</p>
-        <Link href="/products" className="mt-8 inline-flex rounded-full bg-ink text-cream px-8 py-4 font-medium hover:bg-ember transition-colors">
+        <Link href="/products" className="mt-8 inline-flex rounded-md bg-brand text-white px-6 py-3 font-medium hover:bg-brand-deep transition-colors">
           Към магазина
         </Link>
       </div>
@@ -144,20 +144,20 @@ export default function CheckoutPage() {
   }
 
   const option = (active: boolean) =>
-    `rounded-[28px] border-2 p-5 sm:p-6 cursor-pointer transition-colors ${active ? 'border-ink bg-paper' : 'border-ink/10 hover:border-ink/30'}`;
+    `rounded-lg border-2 p-5 sm:p-6 cursor-pointer transition-colors ${active ? 'border-ink bg-surface' : 'border-ink/10 hover:border-ink/30'}`;
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 py-12">
-      <h1 className="font-display text-4xl sm:text-5xl tracking-tight">Поръчка</h1>
+      <h1 className="font-semibold text-2xl sm:text-4xl ">Поръчка</h1>
 
       <div className="mt-10 grid lg:grid-cols-[1.4fr_1fr] gap-10 items-start">
         <section>
-          <h2 className="font-display text-xl mb-4">1. Доставка и плащане</h2>
+          <h2 className="font-semibold text-xl mb-4">1. Доставка и плащане</h2>
           <div className="space-y-4">
             {/* ECONT */}
             <div onClick={() => setPaymentMethod('econt')} className={option(paymentMethod === 'econt')}>
               <div className="flex items-center gap-4">
-                <span className={`grid place-items-center size-12 shrink-0 rounded-2xl ${paymentMethod === 'econt' ? 'bg-ember text-white' : 'bg-sand'}`}>
+                <span className={`grid place-items-center size-12 shrink-0 rounded-md ${paymentMethod === 'econt' ? 'bg-brand text-white' : 'bg-muted'}`}>
                   <Truck className="size-5" />
                 </span>
                 <div className="flex-1 min-w-0">
@@ -171,13 +171,13 @@ export default function CheckoutPage() {
               {paymentMethod === 'econt' && (
                 <div className="mt-6">
                   {!econtShopId && (
-                    <p className="mb-3 rounded-2xl bg-butter/40 p-3 text-sm">
+                    <p className="mb-3 rounded-md bg-amber-50 border border-amber-200 p-3 text-sm">
                       Еконт още не е конфигуриран (липсва <code>NEXT_PUBLIC_ECONT_SHOP_ID</code>).
                     </p>
                   )}
-                  <iframe src={iframeUrl} className="w-full h-[600px] rounded-2xl bg-white border border-ink/10" title="Доставка с Еконт" />
+                  <iframe src={iframeUrl} className="w-full h-[600px] rounded-md bg-white border border-ink/10" title="Доставка с Еконт" />
                   {econtData && (
-                    <div className="mt-4 rounded-2xl bg-sage/20 border-l-4 border-sage p-4 text-sm">
+                    <div className="mt-4 rounded-md bg-brand/5 border-l-4 border-brand p-4 text-sm">
                       <p className="font-medium">Избран адрес за доставка</p>
                       <p>
                         {econtData.address || econtData.office_name || econtData.office_code}, {econtData.city_name}
@@ -196,7 +196,7 @@ export default function CheckoutPage() {
             {/* STRIPE */}
             <div onClick={() => setPaymentMethod('stripe')} className={option(paymentMethod === 'stripe')}>
               <div className="flex items-center gap-4">
-                <span className={`grid place-items-center size-12 shrink-0 rounded-2xl ${paymentMethod === 'stripe' ? 'bg-ember text-white' : 'bg-sand'}`}>
+                <span className={`grid place-items-center size-12 shrink-0 rounded-md ${paymentMethod === 'stripe' ? 'bg-brand text-white' : 'bg-muted'}`}>
                   <CreditCard className="size-5" />
                 </span>
                 <div className="flex-1 min-w-0">
@@ -208,16 +208,15 @@ export default function CheckoutPage() {
           </div>
         </section>
 
-        <aside className="lg:sticky lg:top-24 rounded-[28px] bg-paper border border-ink/10 p-6 sm:p-8">
-          <h2 className="font-display text-xl mb-6">2. Вашата поръчка</h2>
+        <aside className="lg:sticky lg:top-24 rounded-lg bg-surface border border-ink/10 p-6 sm:p-8">
+          <h2 className="font-semibold text-xl mb-6">2. Вашата поръчка</h2>
           <ul className="divide-y divide-ink/10">
             {items.map((item) => {
               const product = getProduct(item.id);
-              const colour = product?.colors.find((c) => c.name === item.color) ?? product?.colors[0];
               return (
                 <li key={item.key} className="flex gap-4 py-4 first:pt-0">
-                  <div className="size-16 shrink-0 rounded-2xl bg-sand grid place-items-center p-1.5">
-                    {product && colour && <FryerArt shape={product.shape} body={colour.body} accent={colour.accent} className="w-full h-full" />}
+                  <div className="relative size-16 shrink-0 rounded-md bg-muted overflow-hidden">
+                      {product && <ProductImage product={product} sizes="80px" />}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex justify-between gap-2">
@@ -226,14 +225,14 @@ export default function CheckoutPage() {
                     </div>
                     <p className="text-sm text-ink-soft">{item.color}</p>
                     <div className="mt-1 flex items-center gap-1">
-                      <button onClick={() => updateQuantity(item.key, item.quantity - 1)} className="grid place-items-center size-6 rounded-full border border-ink/15 cursor-pointer" aria-label="Намали">
+                      <button onClick={() => updateQuantity(item.key, item.quantity - 1)} className="grid place-items-center size-6 rounded-md border border-ink/15 cursor-pointer" aria-label="Намали">
                         <Minus className="size-3" />
                       </button>
                       <span className="w-6 text-center text-sm tabular-nums">{item.quantity}</span>
-                      <button onClick={() => updateQuantity(item.key, item.quantity + 1)} className="grid place-items-center size-6 rounded-full border border-ink/15 cursor-pointer" aria-label="Увеличи">
+                      <button onClick={() => updateQuantity(item.key, item.quantity + 1)} className="grid place-items-center size-6 rounded-md border border-ink/15 cursor-pointer" aria-label="Увеличи">
                         <Plus className="size-3" />
                       </button>
-                      <button onClick={() => removeFromCart(item.key)} className="ml-auto text-ink-soft hover:text-ember cursor-pointer" aria-label="Премахни">
+                      <button onClick={() => removeFromCart(item.key)} className="ml-auto text-ink-soft hover:text-brand cursor-pointer" aria-label="Премахни">
                         <Trash2 className="size-4" />
                       </button>
                     </div>
@@ -252,7 +251,7 @@ export default function CheckoutPage() {
               <span>{paymentMethod === 'econt' ? 'по тарифа на Еконт' : 'изчислява се при плащане'}</span>
             </div>
           </div>
-          <div className="mt-4 pt-4 border-t border-ink/10 flex justify-between font-display text-xl">
+          <div className="mt-4 pt-4 border-t border-ink/10 flex justify-between font-semibold text-xl">
             <span>Общо</span>
             <span className="tabular-nums">{formatPrice(total)}</span>
           </div>
@@ -260,7 +259,7 @@ export default function CheckoutPage() {
           <button
             onClick={handleCheckout}
             disabled={loading || (paymentMethod === 'econt' && !econtData)}
-            className="mt-6 w-full rounded-full bg-ember text-white py-4 font-medium hover:bg-ember-deep transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+            className="mt-6 w-full rounded-md bg-brand text-white py-4 font-medium hover:bg-brand-deep transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
           >
             {loading ? 'Обработване…' : paymentMethod === 'econt' ? 'Завърши поръчката' : 'Продължи към плащане'}
           </button>
@@ -268,7 +267,7 @@ export default function CheckoutPage() {
           {paymentMethod === 'econt' && !econtData && (
             <p className="mt-3 text-sm text-center text-ink-soft">Изберете адрес за доставка във формата на Еконт.</p>
           )}
-          {error && <p className="mt-3 rounded-2xl bg-ember/10 text-ember-deep p-3 text-sm">{error}</p>}
+          {error && <p className="mt-3 rounded-md bg-brand/10 text-brand-deep p-3 text-sm">{error}</p>}
           <p className="mt-4 flex items-center justify-center gap-1.5 text-xs text-ink-soft">
             <Lock className="size-3" /> Защитено плащане · данните на картата не минават през нас
           </p>

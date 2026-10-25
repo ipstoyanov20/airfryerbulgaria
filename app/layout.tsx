@@ -1,20 +1,15 @@
 import type { Metadata } from 'next';
-import { Onest, Unbounded } from 'next/font/google';
+import { IBM_Plex_Sans } from 'next/font/google';
 import './globals.css';
 import { CartProvider } from '@/contexts/CartContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CartDrawer from '@/components/CartDrawer';
 
-const unbounded = Unbounded({
-  variable: '--font-unbounded',
+const plex = IBM_Plex_Sans({
+  variable: '--font-plex',
   subsets: ['latin', 'cyrillic'],
-  weight: ['400', '500', '600', '700'],
-});
-
-const onest = Onest({
-  variable: '--font-onest',
-  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '600'],
 });
 
 export const metadata: Metadata = {
@@ -28,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="bg" className={`${unbounded.variable} ${onest.variable} antialiased`}>
+    <html lang="bg" className={`${plex.variable} antialiased`}>
       <body className="min-h-dvh flex flex-col">
         <CartProvider>
           <Header />

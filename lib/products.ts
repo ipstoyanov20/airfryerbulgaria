@@ -1,5 +1,4 @@
-export type FryerShape = 'basket' | 'window' | 'dual' | 'oven';
-export type Category = 'compact' | 'family' | 'dual' | 'oven';
+export type Category = 'single' | 'dual' | 'oven';
 
 export interface Product {
   id: string;
@@ -7,7 +6,8 @@ export interface Product {
   tagline: string;
   description: string;
   category: Category;
-  shape: FryerShape;
+  /** Product photo under /public/images. */
+  image: string;
   price: number;
   oldPrice?: number;
   capacity: string;
@@ -23,8 +23,7 @@ export interface Product {
 }
 
 export const categories: { id: Category; name: string; hint: string }[] = [
-  { id: 'compact', name: 'Компактни', hint: '1–2 души · до 4 л' },
-  { id: 'family', name: 'Семейни', hint: '3–5 души · 5–8 л' },
+  { id: 'single', name: 'Една кошница', hint: 'От 3.5 до 8 л' },
   { id: 'dual', name: 'Двойна кошница', hint: 'Две ястия наведнъж' },
   { id: 'oven', name: 'Фурна-фритюрник', hint: 'Печене, сушене, грил' },
 ];
@@ -42,8 +41,8 @@ export const products: Product[] = [
     tagline: 'Малък на ръст, голям на вкус',
     description:
       'Компактен фритюрник с горещ въздух за едно или двама души. Загрява се за под 2 минути и се побира и в най-малката кухня.',
-    category: 'compact',
-    shape: 'basket',
+    category: 'single',
+    image: '/images/aira-mini.jpg',
     price: 59.9,
     oldPrice: 79.9,
     capacity: '3.5 л',
@@ -61,9 +60,9 @@ export const products: Product[] = [
     name: 'Aira Classic',
     tagline: 'Любимецът на България',
     description:
-      'Балансираният избор за всяко семейство. Технологията Vortex 360° разпределя въздуха равномерно — хрупкаво отвън, сочно отвътре.',
-    category: 'family',
-    shape: 'basket',
+      'Балансираният избор за ежедневно готвене. Технологията Vortex 360° разпределя въздуха равномерно — хрупкаво отвън, сочно отвътре.',
+    category: 'single',
+    image: '/images/aira-classic.jpg',
     price: 89.9,
     capacity: '5.5 л',
     power: '1700 W',
@@ -81,8 +80,8 @@ export const products: Product[] = [
     tagline: 'Виж как става хрупкаво',
     description:
       'Прозорец от закалено стъкло и вътрешна светлина — следиш готвенето, без да отваряш и без да губиш топлина.',
-    category: 'family',
-    shape: 'window',
+    category: 'single',
+    image: '/images/aira-vision.jpg',
     price: 119.9,
     capacity: '6 л',
     power: '1800 W',
@@ -101,7 +100,7 @@ export const products: Product[] = [
     description:
       'Две независими кошници по 4.5 л. Функцията Sync Finish ги приключва в една и съща секунда — вечерята е готова наведнъж.',
     category: 'dual',
-    shape: 'dual',
+    image: '/images/aira-duo.jpg',
     price: 169.9,
     oldPrice: 199.9,
     capacity: '2 × 4.5 л',
@@ -111,7 +110,7 @@ export const products: Product[] = [
     reviews: 864,
     badge: '−15%',
     colors: [graphite, cream],
-    features: ['Sync Finish & Match Cook', 'Две независими зони', 'Капацитет за 6 души'],
+    features: ['Sync Finish & Match Cook', 'Две независими зони', 'Общо 9 л обем'],
     specs: { Обем: '2 × 4.5 л', Мощност: '2400 W', Температура: '40–240 °C', Таймер: '24 ч', Размери: '40 × 38 × 32 см' },
   },
   {
@@ -119,9 +118,9 @@ export const products: Product[] = [
     name: 'Aira Max XXL',
     tagline: 'Цяло пиле. Без проблем.',
     description:
-      'Най-голямата единична кошница в гамата — побира цяло пиле до 2 кг. Създаден за големи семейства и гости.',
-    category: 'family',
-    shape: 'basket',
+      'Най-голямата единична кошница в гамата — побира цяло пиле до 2 кг. Подходящ, когато готвите за повече хора.',
+    category: 'single',
+    image: '/images/aira-max.jpg',
     price: 139.9,
     capacity: '8 л',
     power: '2000 W',
@@ -138,8 +137,8 @@ export const products: Product[] = [
     tagline: 'Готви от телефона',
     description:
       'Стартирай, следи и получи известие, когато е готово. 200+ рецепти в приложението с автоматични настройки.',
-    category: 'compact',
-    shape: 'window',
+    category: 'single',
+    image: '/images/aira-smart.jpg',
     price: 129.9,
     capacity: '5 л',
     power: '1700 W',
@@ -157,7 +156,7 @@ export const products: Product[] = [
     description:
       'Фурна с горещ въздух и три нива. Пече, запича, суши плодове и върти шиш — 12 функции в един уред.',
     category: 'oven',
-    shape: 'oven',
+    image: '/images/aira-oven-pro.jpg',
     price: 209.9,
     oldPrice: 239.9,
     capacity: '12 л',
@@ -177,7 +176,7 @@ export const products: Product[] = [
     description:
       'Двойна кошница с инжекция на пара — сочно месо, пухкав хляб и хрупкава коричка. Флагманът в гамата.',
     category: 'dual',
-    shape: 'dual',
+    image: '/images/aira-duo-steam.jpg',
     price: 229.9,
     capacity: '2 × 5 л',
     power: '2600 W',

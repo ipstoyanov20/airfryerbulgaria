@@ -30,13 +30,13 @@ export default async function ProductsPage(props: PageProps<'/products'>) {
   };
 
   const chip = (isActive: boolean) =>
-    `rounded-full px-4 py-2 text-sm border transition-colors ${
-      isActive ? 'bg-ink text-cream border-ink' : 'border-ink/15 hover:border-ink/40'
+    `rounded-md px-4 py-2 text-sm border transition-colors ${
+      isActive ? 'bg-ink text-white border-ink' : 'border-ink/15 hover:border-ink/40'
     }`;
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 py-12">
-      <h1 className="font-display text-4xl sm:text-6xl tracking-tight">{active ? active.name : 'Всички модели'}</h1>
+      <h1 className="font-semibold text-2xl sm:text-4xl ">{active ? active.name : 'Всички модели'}</h1>
       <p className="mt-3 text-ink-soft">{active ? active.hint : `${products.length} фритюрника с горещ въздух`}</p>
 
       <div className="mt-10 flex flex-col md:flex-row md:items-center justify-between gap-4 border-y border-ink/10 py-4">
@@ -50,7 +50,7 @@ export default async function ProductsPage(props: PageProps<'/products'>) {
         </div>
         <div className="flex gap-2 text-sm">
           {Object.entries(sorts).map(([k, v]) => (
-            <Link key={k} href={href({ sort: k })} className={`px-3 py-2 rounded-full ${sort === k ? 'font-medium text-ember' : 'text-ink-soft hover:text-ink'}`}>
+            <Link key={k} href={href({ sort: k })} className={`px-3 py-2 rounded-md ${sort === k ? 'font-medium text-brand' : 'text-ink-soft hover:text-ink'}`}>
               {v.label}
             </Link>
           ))}

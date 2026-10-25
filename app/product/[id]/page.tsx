@@ -38,11 +38,11 @@ export default async function ProductPage(props: PageProps<'/product/[id]'>) {
 
       <section className="mt-24 grid lg:grid-cols-2 gap-12">
         <div>
-          <h2 className="font-display text-3xl tracking-tight">Описание</h2>
+          <h2 className="font-semibold text-2xl ">Описание</h2>
           <p className="mt-4 text-lg text-ink-soft leading-relaxed text-pretty">{product.description}</p>
         </div>
         <div>
-          <h2 className="font-display text-3xl tracking-tight">Характеристики</h2>
+          <h2 className="font-semibold text-2xl ">Характеристики</h2>
           <dl className="mt-4 divide-y divide-ink/10 border-y border-ink/10">
             {Object.entries(product.specs).map(([k, v]) => (
               <div key={k} className="flex justify-between py-3">
@@ -59,7 +59,7 @@ export default async function ProductPage(props: PageProps<'/product/[id]'>) {
       </section>
 
       <section className="mt-24">
-        <h2 className="font-display text-3xl tracking-tight mb-8">Може да харесате и</h2>
+        <h2 className="font-semibold text-2xl  mb-8">Може да харесате и</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12">
           {more.map((p) => (
             <ProductCard key={p.id} product={p} />

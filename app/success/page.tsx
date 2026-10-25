@@ -28,8 +28,8 @@ export default async function SuccessPage(props: PageProps<'/success'>) {
   return (
     <div className="mx-auto max-w-xl px-4 py-24 text-center">
       {paid && <ClearCart />}
-      {paid ? <CheckCircle2 className="size-16 text-ember mx-auto mb-6" /> : <Clock className="size-16 text-ink-soft mx-auto mb-6" />}
-      <h1 className="font-display text-3xl sm:text-4xl tracking-tight">
+      {paid ? <CheckCircle2 className="size-16 text-brand mx-auto mb-6" /> : <Clock className="size-16 text-ink-soft mx-auto mb-6" />}
+      <h1 className="font-semibold text-2xl sm:text-4xl ">
         {paid ? 'Плащането е успешно!' : 'Проверяваме плащането'}
       </h1>
       <p className="mt-4 text-ink-soft">
@@ -43,7 +43,7 @@ export default async function SuccessPage(props: PageProps<'/success'>) {
           'Не успяхме да потвърдим плащането. Ако сте платили, ще получите имейл с потвърждение до няколко минути.'
         )}
       </p>
-      <Link href="/" className="mt-8 inline-flex rounded-full bg-ink text-cream px-8 py-4 font-medium hover:bg-ember transition-colors">
+      <Link href="/" className="mt-8 inline-flex rounded-md bg-brand text-white px-6 py-3 font-medium hover:bg-brand-deep transition-colors">
         Към началото
       </Link>
     </div>

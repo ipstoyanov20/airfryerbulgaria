@@ -1,48 +1,48 @@
 import Link from 'next/link';
 import { Logo } from './Header';
 import { categories } from '@/lib/products';
+import { imageCredits } from '@/lib/image-credits';
 
 export default function Footer() {
   return (
-    <footer className="bg-ink text-cream mt-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-16 grid gap-12 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
+    <footer className="bg-surface border-t border-ink/10 mt-16">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-12 grid gap-10 sm:grid-cols-2 md:grid-cols-[1.5fr_1fr_1fr]">
         <div>
-          <Logo className="text-cream" />
-          <p className="mt-4 text-cream/60 max-w-xs text-sm leading-relaxed">
-            Фритюрници с горещ въздух, подбрани и тествани в България. Доставка до всеки офис на Еконт.
+          <Logo />
+          <p className="mt-3 text-ink-soft max-w-xs text-sm leading-relaxed">
+            Фритюрници с горещ въздух с доставка до всеки офис на Еконт.
           </p>
         </div>
         <div>
-          <h3 className="font-display text-sm mb-4">Магазин</h3>
-          <ul className="space-y-2 text-sm text-cream/60">
+          <h3 className="text-sm font-semibold mb-3">Магазин</h3>
+          <ul className="space-y-2 text-sm text-ink-soft">
             {categories.map((c) => (
               <li key={c.id}>
-                <Link href={`/products?category=${c.id}`} className="hover:text-cream">{c.name}</Link>
+                <Link href={`/products?category=${c.id}`} className="hover:text-ink">{c.name}</Link>
               </li>
             ))}
           </ul>
         </div>
         <div>
-          <h3 className="font-display text-sm mb-4">Помощ</h3>
-          <ul className="space-y-2 text-sm text-cream/60">
-            <li><Link href="/#faq" className="hover:text-cream">Доставка и плащане</Link></li>
-            <li><Link href="/#faq" className="hover:text-cream">Връщане до 30 дни</Link></li>
-            <li><Link href="/#faq" className="hover:text-cream">Гаранция</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h3 className="font-display text-sm mb-4">Контакт</h3>
-          <ul className="space-y-2 text-sm text-cream/60">
+          <h3 className="text-sm font-semibold mb-3">Контакт</h3>
+          <ul className="space-y-2 text-sm text-ink-soft">
             <li>Пон–Пет · 9:00–18:00</li>
             <li>hello@airfryer.bg</li>
+            <li><Link href="/#faq" className="hover:text-ink">Доставка, връщане, гаранция</Link></li>
           </ul>
         </div>
       </div>
-      <div className="border-t border-cream/10">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-6 flex flex-col sm:flex-row gap-4 justify-between text-xs text-cream/50">
+      <div className="border-t border-ink/10">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 py-5 flex flex-col gap-2 text-xs text-ink-soft">
           <p>© {new Date().getFullYear()} AirFryer.bg · Всички цени са в евро с ДДС</p>
-          <p className="flex gap-3">
-            <span>Visa</span><span>Mastercard</span><span>Apple Pay</span><span>Google Pay</span><span>Наложен платеж</span>
+          <p>
+            Снимки:{' '}
+            {imageCredits.map((c, i) => (
+              <span key={c.author}>
+                {i > 0 && ' · '}
+                <a href={c.source} target="_blank" rel="noopener noreferrer" className="underline hover:text-ink">{c.author}</a> ({c.license})
+              </span>
+            ))}
           </p>
         </div>
       </div>
