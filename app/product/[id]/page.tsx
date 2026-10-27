@@ -4,7 +4,8 @@ import { notFound } from 'next/navigation';
 import { ChevronRight } from 'lucide-react';
 import ProductCard from '@/components/ProductCard';
 import ProductBuyBox from '@/components/ProductBuyBox';
-import { getProduct, products } from '@/lib/products';
+import { categories, getProduct, products } from '@/lib/products';
+import { SITE_URL, jsonLd } from '@/lib/site';
 
 export function generateStaticParams() {
   return products.map((p) => ({ id: p.id }));
@@ -14,7 +15,7 @@ export async function generateMetadata(props: PageProps<'/product/[id]'>): Promi
   const { id } = await props.params;
   const product = getProduct(id);
   if (!product) return {};
-  const title = `${product.name} ${product.capacity}`;
+  const title = `${product.name} ${product.capacity} — air fryer с горещ въздух`;
   return {
     title,
     description: product.description,
@@ -31,8 +32,29 @@ export default async function ProductPage(props: PageProps<'/product/[id]'>) {
   const related = products.filter((p) => p.id !== product.id && p.category === product.category).slice(0, 4);
   const more = related.length ? related : products.filter((p) => p.id !== product.id).slice(0, 4);
 
+  const url = `${SITE_URL}/product/${product.id}`;
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: `${product.name} ${product.capacity}`,
+    description: product.description,
+    image: `${SITE_URL}${product.image}`,
+    sku: product.id,
+    brand: { '@type': 'Brand', name: 'Aira' },
+    category: `Air fryer — ${categories.find((c) => c.id === product.category)?.name ?? ''}`,
+    offers: {
+      '@type': 'Offer',
+      url,
+      priceCurrency: 'EUR',
+      price: product.price.toFixed(2),
+      availability: 'https://schema.org/InStock',
+      itemCondition: 'https://schema.org/NewCondition',
+    },
+  };
+
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 py-8">
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(structuredData)} />
       <nav className="flex items-center gap-1 text-sm text-ink-soft mb-8">
         <Link href="/" className="hover:text-ink">Начало</Link>
         <ChevronRight className="size-3.5" />

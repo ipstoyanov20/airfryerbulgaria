@@ -4,10 +4,13 @@ import Link from 'next/link';
 import { ArrowRight, RotateCcw, ShieldCheck, Truck, CreditCard, Plus } from 'lucide-react';
 import ProductCard from '@/components/ProductCard';
 import { products } from '@/lib/products';
+import { SITE_NAME, SITE_URL, jsonLd } from '@/lib/site';
 
 export const metadata: Metadata = { alternates: { canonical: '/' } };
 
 const faqs = [
+  { q: 'Какво е air fryer (еърфрайър)?', a: 'Air fryer, или фритюрник с горещ въздух, е малък уред, който готви с много бързо циркулиращ горещ въздух вместо в олио. Така картофки, пилешко, зеленчуци и замразени храни стават хрупкави отвън и сочни отвътре — с до 80% по-малко мазнина и по-бързо от фурна.' },
+  { q: 'Как да избера air fryer?', a: 'За малки порции стига кошница 3.5–4 л, за повече храна наведнъж — 5–8 л, а ако готвите основно и гарнитура едновременно, изберете модел с двойна кошница. Фурна-фритюрникът е най-гъвкав — пече, суши и върти шиш.' },
   { q: 'Как се плаща?', a: 'Можете да платите с карта (Visa, Mastercard, Apple Pay, Google Pay) чрез защитената платформа на Stripe или с наложен платеж при получаване в офис на Еконт или до адрес.' },
   { q: 'Колко време отнема доставката?', a: 'Изпращаме в рамките на 24 часа в работни дни. Еконт доставя за 1–2 работни дни до всеки офис, автомат или адрес в България. Цената на доставката се изчислява при поръчка.' },
   { q: 'Мога ли да върна продукта?', a: 'Да — имате 30 дни да върнете продукта, ако не сте доволни, без да обяснявате защо.' },
@@ -16,16 +19,31 @@ const faqs = [
 ];
 
 export default function Home() {
+  const structuredData = [
+    { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_NAME, url: SITE_URL, inLanguage: 'bg' },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'OnlineStore',
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: `${SITE_URL}/apple-icon.png`,
+      email: 'hello@airfryer.eu',
+      description: 'Онлайн магазин за air fryer фритюрници с горещ въздух с доставка в България.',
+      areaServed: 'BG',
+    },
+  ];
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(structuredData)} />
       {/* HERO */}
       <section className="mx-auto max-w-6xl px-4 sm:px-6 pt-10 pb-16 md:pt-16 grid md:grid-cols-2 gap-10 items-center">
         <div>
           <h1 className="text-4xl sm:text-5xl font-semibold leading-tight text-balance">
-            Фритюрници с горещ въздух
+            Air fryer — фритюрници с горещ въздух
           </h1>
           <p className="mt-5 max-w-md text-lg text-ink-soft text-pretty">
-            Хрупкава храна с до 80% по-малко мазнина. Изпращаме до 24 часа с Еконт до офис, автомат или адрес.
+            Хрупкава храна с до 80% по-малко мазнина — без олио и без чакане. Изпращаме до 24 часа с Еконт до офис, автомат или адрес.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="/products" className="inline-flex items-center gap-2 rounded-md bg-brand text-white px-5 py-3 font-medium hover:bg-brand-deep transition-colors">
@@ -71,7 +89,7 @@ export default function Home() {
       {/* PRODUCTS */}
       <section className="mx-auto max-w-6xl px-4 sm:px-6 py-16">
         <div className="flex items-end justify-between gap-6 mb-8">
-          <h2 className="text-2xl sm:text-3xl font-semibold">Модели</h2>
+          <h2 className="text-2xl sm:text-3xl font-semibold">Air fryer модели</h2>
           <Link href="/products" className="inline-flex items-center gap-1 text-sm font-medium text-brand hover:underline">
             Всички {products.length} <ArrowRight className="size-4" />
           </Link>
@@ -89,7 +107,7 @@ export default function Home() {
           <Image src="/images/fries.jpg" alt="Картофки, приготвени във фритюрник с горещ въздух" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
         </div>
         <div>
-          <h2 className="text-2xl sm:text-3xl font-semibold text-balance">Защо горещ въздух?</h2>
+          <h2 className="text-2xl sm:text-3xl font-semibold text-balance">Защо air fryer?</h2>
           <ul className="mt-6 space-y-4">
             {[
               ['До 80% по-малко мазнина', 'Спрямо дълбоко пържене — за замразени продукти не трябва олио.'],

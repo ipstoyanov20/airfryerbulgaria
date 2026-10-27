@@ -3,7 +3,11 @@ import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 import { categories, products, type Category } from '@/lib/products';
 
-export const metadata: Metadata = { title: 'Всички модели', alternates: { canonical: '/products' } };
+export const metadata: Metadata = {
+  title: 'Air fryer — всички модели и цени',
+  description: 'Сравнете всички air fryer фритюрници с горещ въздух: компактни, с двойна кошница и фурни-фритюрници. Цени в евро, доставка с Еконт.',
+  alternates: { canonical: '/products' },
+};
 
 const sorts = {
   popular: { label: 'Популярни', fn: (a: (typeof products)[0], b: (typeof products)[0]) => b.reviews - a.reviews },
@@ -36,7 +40,7 @@ export default async function ProductsPage(props: PageProps<'/products'>) {
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 py-12">
-      <h1 className="font-semibold text-2xl sm:text-4xl ">{active ? active.name : 'Всички модели'}</h1>
+      <h1 className="font-semibold text-2xl sm:text-4xl ">{active ? `Air fryer — ${active.name.toLowerCase()}` : 'Air fryer — всички модели'}</h1>
       <p className="mt-3 text-ink-soft">{active ? active.hint : `${products.length} фритюрника с горещ въздух`}</p>
 
       <div className="mt-10 flex flex-col md:flex-row md:items-center justify-between gap-4 border-y border-ink/10 py-4">
